@@ -15,5 +15,13 @@ namespace PustokApp
 
         }
         public DbSet<Slider> Sliders { get; set; }
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<BookPhoto> BookPhotos { get; set; }
+        public DbSet<Feature> Features { get; set; }
+        public DbSet<Partner> Partners { get; set; }
+        public DbSet<Promotion> Promotions { get; set; }
+
     }
 }

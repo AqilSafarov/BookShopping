@@ -15,7 +15,7 @@ namespace PustokApp.Models
         public string Name { get; set; }
         [MaxLength(500)]
         public string Desc { get; set; }
-        [MaxLength(20)]
+        [MaxLength(10)]
 
         public string CodePrefix { get; set; }
         public int CodeNum { get; set; }
@@ -30,11 +30,12 @@ namespace PustokApp.Models
 
         public bool IsNew { get; set; }
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
-        //public virtual ICollection<BookTags> BookTags { get; set; }
+        public int AuthorId { get; set; }
+        public virtual Author Author { get; set; }
 
-        //public virtual ICollection<BookImages> BookImages { get; set; }
+        public virtual ICollection <BookPhoto> BookPhotos { get; set; }
 
 
     }

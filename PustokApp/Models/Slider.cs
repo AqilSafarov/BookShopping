@@ -16,6 +16,9 @@ namespace PustokApp.Models
         [MaxLength(100)]
 
         public string Title { get; set; }
+        [MaxLength(100)]
+
+        public string Subtitle { get; set; }
         [MaxLength(500)]
 
         public string Desc { get; set; }
