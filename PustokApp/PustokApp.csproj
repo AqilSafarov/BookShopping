@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Manage\ViewModels\" />
-    <Folder Include="wwwroot\manage\assets\" />
   </ItemGroup>
 
 </Project>

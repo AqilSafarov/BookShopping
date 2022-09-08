@@ -162,3 +162,4 @@ C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\obj\Debug\netcoreapp3.1\Ra
 C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\_ViewImports.cshtml.g.cs
 C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\_ViewStart.cshtml.g.cs
 C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Home\Index.cshtml.g.cs
+C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Author\Index.cshtml.g.cs
