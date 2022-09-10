@@ -10,7 +10,8 @@ namespace PustokApp.Models
     {
         [Key]
         public int Id { get; set; }
-        [MaxLength(50)]
+        [Required]
+        [MaxLength(50,ErrorMessage ="50 den uzun ola bilmez")]
         public string Fullname { get; set; }
        
         [MaxLength(500)]
