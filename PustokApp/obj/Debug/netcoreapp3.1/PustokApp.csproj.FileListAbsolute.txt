@@ -156,7 +156,6 @@ C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\bin\Debug\netcoreapp3.1\Mi
 C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_BooksSliderPartial.cshtml.g.cs
 C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_BookSliderCardPartial.cshtml.g.cs
-C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\obj\Debug\netcoreapp3.1\Razor\Views\Book\Index.cshtml.g.cs
 C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\VcBook\Default.cshtml.g.cs
 C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\_ViewImports.cshtml.g.cs
@@ -166,3 +165,7 @@ C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\obj\Debug\netcoreapp3.1\Ra
 C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Author\Create.cshtml.g.cs
 C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Author\Edit.cshtml.g.cs
 C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Author\Delete.cshtml.g.cs
+C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\obj\Debug\netcoreapp3.1\Razor\Views\Book\Index.cshtml.g.cs
+C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Book\Index.cshtml.g.cs
+C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Book\Create.cshtml.g.cs
+C:\Users\User\OneDrive\Masaüstü\PustokApp\PustokApp\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Book\Edit.cshtml.g.cs

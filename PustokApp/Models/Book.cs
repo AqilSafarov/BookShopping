@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -22,7 +23,10 @@ namespace PustokApp.Models
         [Column(TypeName = "bit")]
 
         public bool IsAvailable { get; set; }
+        [Range(0,double.MaxValue)]
         public double Price { get; set; }
+        [Range(0, double.MaxValue)]
+
         public double DiscountPercent { get; set; }
         public double DiscountedPrice { get; set; }
         public DateTime CratedAt { get; set; }
@@ -35,6 +39,8 @@ namespace PustokApp.Models
         public int AuthorId { get; set; }
         public virtual Author Author { get; set; }
 
+        [NotMapped]
+        public IFormFile[] Files { get; set; }
         public virtual ICollection <BookPhoto> BookPhotos { get; set; }
 
 

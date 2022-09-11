@@ -1,0 +1,86 @@
+﻿@model Book
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+
+    List<Author> authors = ViewBag.Authors;
+    List<Category> categories = ViewBag.Categories;
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="@Model.Name" for="fullname">Name</label>
+                        <input asp-for="@Model.Name" class="form-control" id="Name" placeholder="Name">
+                        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label asp-for="@Model.Price" for="fullname">Price</label>
+                        <input asp-for="@Model.Price" class="form-control" id="Fullname" placeholder="Price">
+                        <span asp-validation-for="@Model.Price" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label asp-for="@Model.DiscountPercent" for="DiscountPercent">DiscountPercent</label>
+                        <input asp-for="@Model.DiscountPercent" class="form-control" id="DiscountPercent" placeholder="DiscountPercent">
+                        <span asp-validation-for="@Model.DiscountPercent" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label asp-for="@Model.IsNew" for="IsNew">IsNew</label>
+                        <input asp-for="@Model.IsNew" class="form-control" id="IsNew" placeholder="IsNew">
+                        <span asp-validation-for="@Model.IsNew" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label asp-for="@Model.IsAvailable" for="IsAvailable">Email</label>
+                        <input asp-for="@Model.IsAvailable" class="form-control" id="IsAvailable" placeholder="IsAvailable">
+                        <span asp-validation-for="@Model.IsAvailable" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="@Model.Desc" for="desc">Desc</label>
+                        <textarea asp-for="@Model.Desc" class="form-control" id="desc" placeholder="Description" rows="3"></textarea>
+                        <span asp-validation-for="@Model.Desc" class="text-danger"></span>
+
+                    </div>
+                    @*<div class="form-group col-md-3">
+            <label for="authorId">Authors</label>
+            <select class="form-control" name="authorId" id="authorId">
+                @foreach (var item in authors)
+                {
+                    <option value="@item.Id">@item.Fullname</option>
+
+                }
+
+            </select>
+            <span asp-validation-for="@Model.AuthorId" class="text-danger"></span>
+
+        </div>*@
+                    <div class="form-group col-md-3">
+                        <label asp-for="@Model.AuthorId">Category</label>
+                        <select class="form-control" asp-for="@Model.AuthorId" asp-items="@(new SelectList(authors,"Id","Fullname"))">
+                        </select>
+                        <span asp-validation-for="@Model.AuthorId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label asp-for="@Model.CategoryId">Category</label>
+                        <select class="form-control" asp-for="@Model.CategoryId" asp-items="@(new SelectList(categories,"Id","Name"))">
+                        </select>
+                        <span asp-validation-for="@Model.CategoryId" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+}
+

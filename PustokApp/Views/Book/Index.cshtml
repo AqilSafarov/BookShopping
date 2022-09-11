@@ -175,7 +175,7 @@
                 </div>
                 <div class="shop-product-wrap list with-pagination row space-db--30 shop-border">
 
-                    @await Component.InvokeAsync("VcBook", new { page = selectedPg, categoryId=categoryId })
+                    @await Component.InvokeAsync("VcBook", new { page = selectedPg, categoryId = categoryId })
 
 
                 </div>
@@ -213,7 +213,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a asp-action="index" asp-controller="book" asp-route-page="@pageCount"  asp-route-categoryId="@categoryId"class="single-btn next-btn">
+                                        <a asp-action="index" asp-controller="book" asp-route-page="@pageCount" asp-route-categoryId="@categoryId" class="single-btn next-btn">
                                             <i class="zmdi zmdi-chevron-right"></i>|
                                         </a>
                                     </li>

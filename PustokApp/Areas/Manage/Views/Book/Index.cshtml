@@ -1,0 +1,131 @@
+﻿@model BookVm
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+
+    int maxPageCount = ViewBag.PageCount;
+    int selectedPage = ViewBag.SelectedPage;
+    int counter = (selectedPage - 1) * 8 + 1;
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-end mb-2">
+        <a asp-action="create" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Create new
+        </a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr class="row">
+                <th class="col-md-1" scope="col">#</th>
+                <th class="col-md-3" scope="col">Name</th>
+                <th class="col-md-2" scope="col">Author Fullname</th>
+                <th class="col-md-2" scope="col">Price</th>
+                <th class="col-md-1" scope="col">IsNew</th>
+                <th class="col-md-1" scope="col">IsAvailable</th>
+                <th class="col-md-2"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.Books)
+            {
+
+            <tr class="row">
+                <td class="col-md-1">@counter</td>
+                <td class="col-md-3">@item.Name</td>
+                <td class="col-md-2">@item.Author.Fullname</td>
+                <td class="col-md-2">@item.Price</td>
+                <td class="col-md-1">@item.IsNew</td>
+                <td class="col-md-1">@item.IsAvailable</td>
+                <td class="col-md-2">
+                    <a href="#" class="btn btn-info">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                    <a asp-action="edit" asp-route-id="@item.Id" class="btn btn-warning">
+                        <i class="far fa-edit"></i>
+                    </a>
+                    <a asp-action="delete" asp-route-id="@item.Id" class="btn btn-danger delete">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+                counter++;
+            }
+
+
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+            @if (selectedPage > 1)
+            {
+
+                <li class="page-item ">
+                    <a class="page-link" asp-action="index" asp-route-page="1" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            }
+            @for (int i = (selectedPage > 1 ? (selectedPage - 1) : 1); i <= (selectedPage < maxPageCount ? selectedPage + 1 : maxPageCount); i++)
+            {
+                <li class="page-item"><a class="page-link" asp-action="index" asp-route-page="@i">@i</a></li>
+
+            }
+
+            @if (selectedPage < maxPageCount)
+            {
+                <li class="page-item ">
+                    <a class="page-link" asp-action="index" asp-route-page="@maxPageCount" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            }
+
+
+
+        </ul>
+    </nav>
+
+</div>
+@section Scripts{
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $(document).on("click", ".delete", function (e) {
+                e.preventDefault();
+                url = $(this).attr("href");
+                swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this imaginary file!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+
+                            fetch(url).then(function (response) {
+                                if (response.status == 200) {
+                                    swal("Poof! Your data  deleted!", {
+                                        icon: "success",
+                                    });
+                                    location.reload();
+                                }
+                                else {
+                                    swal("An error occurred")
+                                }
+
+                            })
+
+                        } else {
+                            swal("Your imaginary file is safe!");
+                        }
+                    });
+            })
+        })
+
+    </script>
+}

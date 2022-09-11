@@ -29,6 +29,7 @@ namespace PustokApp
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PustokProject")));
 
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+         
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore

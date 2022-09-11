@@ -28,10 +28,10 @@
                     </div>
                     <div class="product-card--body">
                         <div class="card-image">
-                            <img src="~/assets/image/products/@item.BookPhotos.FirstOrDefault(x=>x.PosterStatus==true).Name" alt="">*
+                            <img src="~/assets/image/products/@item.BookPhotos.FirstOrDefault(x=>x.PosterStatus==true)?.Name" alt="">*
                             <div class="hover-contents">
                                 <a href="product-details.html" class="hover-image">
-                                    <img src="~/assets/image/products/@item.BookPhotos.FirstOrDefault(x=>x.PosterStatus==false).Name" alt="">
+                                    <img src="~/assets/image/products/@item.BookPhotos.FirstOrDefault(x=>x.PosterStatus==false)?.Name" alt="">
 
                                 </a>
                                 <div class="hover-btns">

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PustokApp.Areas.Manage.ViewModels;
+using PustokApp.Helpers;
 using PustokApp.Models;
 using System;
 using System.Collections.Generic;
@@ -50,10 +51,11 @@ namespace PustokApp.Areas.Manage.Controllers
         public async Task<IActionResult> Create(Author author)
         {
 
-            #region AuthorAlreadyExist
+
+            #region ChechkAuthorAlreadyExsit
             if (await _context.Authors.AnyAsync(a => a.Fullname.ToLower() == author.Fullname.ToLower()))
             {
-                ModelState.AddModelError("Fullname", "Bu adli muellif movcutdur");
+                ModelState.AddModelError("Fullname", "Bu adli yazici movcut deyil");
                 return View();
             }
             #endregion
@@ -65,6 +67,33 @@ namespace PustokApp.Areas.Manage.Controllers
 
             }
             #endregion
+
+
+            //if (author.File != null)
+            //{
+            //    #region ChehckFileRaneg
+
+
+            //    //    if (author.File.Length > 2 * (1024 * 1024))
+            //    //    {
+            //    //        ModelState.AddModelError("File", "2 mq artiq ola bilmez");
+            //    //return View();
+            //    //    }
+            //    #endregion
+
+            //    #region ChechkFileContentType
+            //    //    if (author.File.ContetntType != "img/png" && author.File.ContetntType != "img/jpeg")  //ferlidirse png ve jpeg den addmodelerrrora duwsun
+            //    //    {
+            //    //        ModelState.AddModelError("File", "Image type duzgun deyil");
+            //    //return View();
+
+
+            //    //    }
+            //    #endregion
+
+
+            //}
+
 
             await _context.Authors.AddAsync(author);
             await _context.SaveChangesAsync();
@@ -99,6 +128,46 @@ namespace PustokApp.Areas.Manage.Controllers
             }
 
             #endregion
+
+
+            //if (author.File != null)
+            //{
+            //    #region ChehckFileRaneg
+
+
+            //    //    if (author.File.Length > 2 * (1024 * 1024))
+            //    //    {
+            //    //        ModelState.AddModelError("File", "2 mq artiq ola bilmez");
+            //    //return View();
+            //    //    }
+            //    #endregion
+
+            //    #region ChechkFileContentType
+            //    //    if (author.File.ContetntType != "img/png" && author.File.ContetntType != "img/jpeg")  //ferlidirse png ve jpeg den addmodelerrrora duwsun
+            //    //    {
+            //    //        ModelState.AddModelError("File", "Image type duzgun deyil");
+            //    //return View();
+
+
+            //    //    }
+            //    #endregion
+
+            //string filename=FileManagerHelper.Save(_env.WebRootPath,"oploads/authors",author.File);
+            //if (!string.IsNullOrWhiteSpace(exsitAuthor.Photo))
+            //{
+            //    FileManagerHelper.Delete(_env.WebRootPath, "oploads/authors", exsitAuthor.Photo);
+            //}
+            //exsitAuthor.Photo = filename;
+
+            //}
+            //else if (string.IsNullOrWhiteSpace(author.Photo))
+            //{
+            //    FileManagerHelper.Delete(_env.WebRootPath, "oploads/authors", exsitAuthor.Photo);
+
+
+            //    //exsitAuthor.Photo = null;
+
+            //}
 
             exsitAuthor.Fullname = author.Fullname;
             exsitAuthor.Desc = author.Desc;
@@ -147,6 +216,8 @@ namespace PustokApp.Areas.Manage.Controllers
                 return NotFound();
             }
             #endregion
+
+
 
             _context.Authors.Remove(author);
             _context.SaveChanges();
