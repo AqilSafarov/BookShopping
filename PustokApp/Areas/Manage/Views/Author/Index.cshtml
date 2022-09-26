@@ -19,8 +19,9 @@
             <tr class="row">
                 <th class="col-md-1" scope="col">#</th>
                 <th class="col-md-3" scope="col">Fullname</th>
-                <th class="col-md-3" scope="col">Desc</th>
-                <th class="col-md-3"></th>
+                <th class="col-md-4" scope="col">Desc</th>
+                <th class="col-md-2" scope="col">Photo</th>
+                <th class="col-md-2"></th>
             </tr>
         </thead>
         <tbody>
@@ -28,22 +29,29 @@
             @foreach (var item in Model.Authors)
             {
 
-                <tr class="row">
-                    <td class="col-md-1">@counter</td>
-                    <td class="col-md-4">@item.Fullname</td>
-                    <td class="col-md-4">@(string.IsNullOrWhiteSpace(item.Desc)?"":(item.Desc.Length>150?item.Desc.Substring(0,150) + "..." : item.Desc))</td>
-                    <td class="col-md-3">
-                        <a href="#" class="btn btn-info">
-                            <i class="fas fa-info-circle"></i>
-                        </a>
-                        <a asp-action="edit" asp-route-id="@item.Id" class="btn btn-warning">
-                            <i class="far fa-edit"></i>
-                        </a>
-                        <a asp-action="delete" asp-route-id="@item.Id" class="btn btn-danger delete">
-                            <i class="fas fa-trash"></i>
-                        </a>
-                    </td>
-                </tr>
+            <tr class="row">
+                <td class="col-md-1">@counter</td>
+                <td class="col-md-3">@item.Fullname</td>
+                <td class="col-md-4">@(string.IsNullOrWhiteSpace(item.Desc)?"":(item.Desc.Length>150?item.Desc.Substring(0,150) + "..." : item.Desc))</td>
+                <td class="col-md-2">
+                  @if (item.Photo!=null)
+                  {
+                     <img style="max-width:150px" src="~/uploads/authors/@item.Photo"/>
+                  }
+                </td>
+
+                <td class="col-md-2">
+                    <a href="#" class="btn btn-info">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                    <a asp-action="edit" asp-route-id="@item.Id" class="btn btn-warning">
+                        <i class="far fa-edit"></i>
+                    </a>
+                    <a asp-action="delete" asp-route-id="@item.Id" class="btn btn-danger delete">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
                 counter++;
             }
 

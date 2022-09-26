@@ -7,29 +7,50 @@
 <div class="container-fluid">
     <div class="card">
         <div class="card-body">
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 <div class="form-row">
                     <div class="form-group col-md-8">
-                        <label asp-for="Fullname" for="fullname">Email</label>
-                        <input asp-for="Fullname" class="form-control" id="Fullname" placeholder="Email">
-                        <span asp-validation-for="Fullname" class="text-danger"></span>
+                        <label asp-for="@Model.Fullname" for="fullname">Fullname</label>
+                        <input asp-for="@Model.Fullname" class="form-control" id="Fullname" placeholder="Fullname">
+                        <span asp-validation-for="@Model.Fullname" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-8">
-                        <label asp-for="Desc" for="desc">Desc</label>
-                        <textarea asp-for="Desc" class="form-control" id="desc" placeholder="Description" rows="3"></textarea>
-                        <span asp-validation-for="Desc" class="text-danger"></span>
-
+                        <label asp-for="@Model.Desc" for="desc">Desc</label>
+                        <textarea asp-for="@Model.Desc" class="form-control" id="desc" placeholder="Description" rows="3"></textarea>
+                        <span asp-validation-for="@Model.Desc" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label asp-for="@Model.File" for="fullname">Email</label>
+                        <input accept="image/png,image/jpeg" asp-for="@Model.File" class="form-control" id="Fullname" placeholder="Email">
+                        <div style="margin-top:8px" class="photo-box">
+                            @if (Model.Photo!=null)
+                            {
+                                <img style="max-width:200px" src="~/uploads/authors/@Model.Photo"  alt="Alternate Text"/>
+                                <input asp-for="@Model.Photo" hidden />
+                                <i class="fas fa-times removePhoto" style="cursor:pointer"></i>
+                            }
+                        </div>
+                        <span asp-validation-for="@Model.File" class="text-danger"></span>
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Edit</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>
     </div>
 
 </div>
+
 @section Scripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(document).on("click", ".removePhoto", function () {
+                $(".photo-box").empty()
+            })
+        })
+    </script>
 }
 

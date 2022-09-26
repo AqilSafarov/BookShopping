@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PustokApp.Areas.Manage.ViewModels;
 using PustokApp.Helpers;
 using PustokApp.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,10 +16,12 @@ namespace PustokApp.Areas.Manage.Controllers
     public class AuthorController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IWebHostEnvironment _env;
 
-        public AuthorController(AppDbContext context)
+        public AuthorController(AppDbContext context,IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
         public async Task<IActionResult> Index(int page=1)
         {
@@ -50,8 +54,6 @@ namespace PustokApp.Areas.Manage.Controllers
 
         public async Task<IActionResult> Create(Author author)
         {
-
-
             #region ChechkAuthorAlreadyExsit
             if (await _context.Authors.AnyAsync(a => a.Fullname.ToLower() == author.Fullname.ToLower()))
             {
@@ -69,30 +71,41 @@ namespace PustokApp.Areas.Manage.Controllers
             #endregion
 
 
-            //if (author.File != null)
-            //{
-            //    #region ChehckFileRaneg
+            if (author.File != null)
+            {
+                #region ChehckFileRaneg
 
 
-            //    //    if (author.File.Length > 2 * (1024 * 1024))
-            //    //    {
-            //    //        ModelState.AddModelError("File", "2 mq artiq ola bilmez");
-            //    //return View();
-            //    //    }
-            //    #endregion
+                if (author.File.Length > 2 * (1024 * 1024))
+                {
+                    ModelState.AddModelError("File", "2 mq artiq ola bilmez");
+                    return View();
+                }
+                #endregion
 
-            //    #region ChechkFileContentType
-            //    //    if (author.File.ContetntType != "img/png" && author.File.ContetntType != "img/jpeg")  //ferlidirse png ve jpeg den addmodelerrrora duwsun
-            //    //    {
-            //    //        ModelState.AddModelError("File", "Image type duzgun deyil");
-            //    //return View();
-
-
-            //    //    }
-            //    #endregion
+                #region ChechkFileContentType
+                if (author.File.ContentType != "image/png" && author.File.ContentType != "image/jpeg")  //ferlidirse png ve jpeg den addmodelerrrora duwsun
+                {
+                    ModelState.AddModelError("File", "Image type duzgun deyil");
+                    return View();
 
 
-            //}
+                }
+                #endregion
+
+                //string filename = Guid.NewGuid().ToString() + author.File.FileName;
+                //string path= Path.Combine(_env.WebRootPath, "uploads/authors", filename);
+
+                //using (FileStream stream = new FileStream(path, FileMode.Create))
+                //{
+                //    author.File.CopyTo(stream);
+
+                //}
+
+                string filename = FileManagerHelper.Save(_env.WebRootPath, "uploads/authors", author.File);
+
+                author.Photo = filename; 
+            }
 
 
             await _context.Authors.AddAsync(author);
@@ -130,44 +143,51 @@ namespace PustokApp.Areas.Manage.Controllers
             #endregion
 
 
-            //if (author.File != null)
-            //{
-            //    #region ChehckFileRaneg
+            if (author.File != null)
+            {
+                #region ChehckFileRaneg
 
 
-            //    //    if (author.File.Length > 2 * (1024 * 1024))
-            //    //    {
-            //    //        ModelState.AddModelError("File", "2 mq artiq ola bilmez");
-            //    //return View();
-            //    //    }
-            //    #endregion
+                if (author.File.Length > 2 * (1024 * 1024))
+                {
+                    ModelState.AddModelError("File", "2 mq artiq ola bilmez");
+                    return View();
+                }
+                #endregion
 
-            //    #region ChechkFileContentType
-            //    //    if (author.File.ContetntType != "img/png" && author.File.ContetntType != "img/jpeg")  //ferlidirse png ve jpeg den addmodelerrrora duwsun
-            //    //    {
-            //    //        ModelState.AddModelError("File", "Image type duzgun deyil");
-            //    //return View();
-
-
-            //    //    }
-            //    #endregion
-
-            //string filename=FileManagerHelper.Save(_env.WebRootPath,"oploads/authors",author.File);
-            //if (!string.IsNullOrWhiteSpace(exsitAuthor.Photo))
-            //{
-            //    FileManagerHelper.Delete(_env.WebRootPath, "oploads/authors", exsitAuthor.Photo);
-            //}
-            //exsitAuthor.Photo = filename;
-
-            //}
-            //else if (string.IsNullOrWhiteSpace(author.Photo))
-            //{
-            //    FileManagerHelper.Delete(_env.WebRootPath, "oploads/authors", exsitAuthor.Photo);
+                #region ChechkFileContentType
+                if (author.File.ContentType != "image/png" && author.File.ContentType != "image/jpeg")  //ferlidirse png ve jpeg den addmodelerrrora duwsun
+                {
+                    ModelState.AddModelError("File", "Image type duzgun deyil");
+                    return View();
 
 
-            //    //exsitAuthor.Photo = null;
+                }
+                #endregion
 
-            //}
+                string filename = FileManagerHelper.Save(_env.WebRootPath, "uploads/authors", author.File);
+                if (!string.IsNullOrWhiteSpace(exsitAuthor.Photo))
+                {
+                    FileManagerHelper.Delete(_env.WebRootPath, "uploads/authors", exsitAuthor.Photo);
+                }
+                exsitAuthor.Photo = filename;
+
+            }
+            else if (string.IsNullOrWhiteSpace(author.Photo))
+            {
+
+                //string path = Path.Combine(_env.WebRootPath, "uploads/authors", author.Photo);
+
+                //if (System.IO.File.Exists(path))
+                //{
+                //    System.IO.File.Delete(path);
+                //}
+
+                FileManagerHelper.Delete(_env.WebRootPath, "uploads/authors", exsitAuthor.Photo);
+
+                exsitAuthor.Photo = null;
+
+            }
 
             exsitAuthor.Fullname = author.Fullname;
             exsitAuthor.Desc = author.Desc;
@@ -176,6 +196,7 @@ namespace PustokApp.Areas.Manage.Controllers
 
             return RedirectToAction("Index");
         }
+        #region DifferanceDeleteType
 
         //public async Task<IActionResult> Delete(int id)
         //{
@@ -207,6 +228,8 @@ namespace PustokApp.Areas.Manage.Controllers
         //    return RedirectToAction("index");
         //}
 
+        #endregion
+
         public async Task<IActionResult> Delete(int id)
         {
             Author author = await _context.Authors.FirstOrDefaultAsync(x => x.Id == id);
@@ -217,7 +240,18 @@ namespace PustokApp.Areas.Manage.Controllers
             }
             #endregion
 
+            if (!string.IsNullOrWhiteSpace(author.Photo))
+            {
+                //string path = Path.Combine(_env.WebRootPath, "uploads/authors", author.Photo);
 
+                //if (System.IO.File.Exists(path))
+                //{
+                //    System.IO.File.Delete(path);
+                //}
+
+                FileManagerHelper.Delete(_env.WebRootPath, "uploads/authors", author.Photo);
+
+            }
 
             _context.Authors.Remove(author);
             _context.SaveChanges();

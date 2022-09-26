@@ -51,6 +51,7 @@ namespace PustokApp.Controllers
                     break;
             }
             return Json(books);
+            //return PartialView("_BookSliderPartial", books);
         }
 
         public IActionResult BookSliderCardPartial(BookSliderTabType? type = null)
@@ -69,7 +70,8 @@ namespace PustokApp.Controllers
                     books = _context.Books.Include(x => x.Author).Include(x => x.BookPhotos).OrderByDescending(x => x.CratedAt).Take(12).ToList();
                     break;
             }
-            return PartialView("_BookSliderCardPartial",books);
+            return PartialView("_BookSliderCardPartial", books);
+
         }
 
 

@@ -203,7 +203,7 @@
                                     <ul class="category-menu">
                                         @foreach (var item in service.GetCategories())
                                         {
-                                            <li class="cat-item"><a asp-action="index" asp-controller="book" asp-route-categoryId="@item.Id">@item.Name</a></li>
+                                            <li class="cat-item"> <a asp-action="index" asp-controller="book" asp-route-categoryId="@item.Id">@item.Name</a> </li>
 
                                         }
                                     </ul>
