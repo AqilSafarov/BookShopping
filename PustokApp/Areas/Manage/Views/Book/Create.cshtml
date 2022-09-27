@@ -35,7 +35,7 @@
                         <span asp-validation-for="@Model.IsNew" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-1">
-                        <label asp-for="@Model.IsAvailable" for="IsAvailable">Email</label>
+                        <label asp-for="@Model.IsAvailable" for="IsAvailable">IsAvailable</label>
                         <input asp-for="@Model.IsAvailable" class="form-control" id="IsAvailable" placeholder="IsAvailable">
                         <span asp-validation-for="@Model.IsAvailable" class="text-danger"></span>
                     </div>
@@ -64,6 +64,16 @@
                         </select>
                         <span asp-validation-for="@Model.CategoryId" class="text-danger"></span>
 
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label asp-for="@Model.PosterFile">Poster File</label>
+                        <input asp-for="@Model.PosterFile" class="form-control">
+                        <span asp-validation-for="@Model.PosterFile" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label asp-for="@Model.Files">Photos</label>
+                        <input asp-for="@Model.Files" class="form-control">
+                        <span asp-validation-for="@Model.Files" class="text-danger"></span>
                     </div>
                 </div>
 

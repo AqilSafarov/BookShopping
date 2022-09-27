@@ -41,6 +41,17 @@ namespace PustokApp.Models
 
         [NotMapped]
         public IFormFile[] Files { get; set; }
+
+        [NotMapped]
+        public IFormFile PosterFile { get; set; }
+
+        [NotMapped]
+        public int[] FileIds { get; set; }
+
+        [NotMapped]
+        public int PosterFileId { get; set; }
+
+
         public virtual ICollection <BookPhoto> BookPhotos { get; set; }
 
 

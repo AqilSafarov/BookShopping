@@ -45,19 +45,7 @@
                         <span asp-validation-for="@Model.Desc" class="text-danger"></span>
 
                     </div>
-                    @*<div class="form-group col-md-3">
-            <label for="authorId">Authors</label>
-            <select class="form-control" name="authorId" id="authorId">
-                @foreach (var item in authors)
-                {
-                    <option value="@item.Id">@item.Fullname</option>
 
-                }
-
-            </select>
-            <span asp-validation-for="@Model.AuthorId" class="text-danger"></span>
-
-        </div>*@
                     <div class="form-group col-md-3">
                         <label asp-for="@Model.AuthorId">Category</label>
                         <select class="form-control" asp-for="@Model.AuthorId" asp-items="@(new SelectList(authors,"Id","Fullname"))">
@@ -71,16 +59,80 @@
                         <span asp-validation-for="@Model.CategoryId" class="text-danger"></span>
                     </div>
                 </div>
+                <div class="form-row">
+
+                    <div class="form-group col-md-3">
+
+                        <label asp-for="@Model.PosterFile">Poster File</label>
+                        <input asp-for="@Model.PosterFile" class="form-control">
+                        <span asp-validation-for="@Model.PosterFile" class="text-danger"></span>
+                    </div>
+                    @{
+                        BookPhoto poster = Model.BookPhotos.FirstOrDefault(x => x.PosterStatus == true);
+                    }
+                    @if (poster != null)
+                    {
+                        <div class="form-group col-md-12">
+                            <div style="margin-top:8px" class="photo-box">
+                                <img style="max-width:100%" src="~/uploads/books/@poster.Name" alt="Alternate Text" />
+                                <input name="PosterFileId" value="@poster.Id" hidden />
+                                <i class="fas fa-times removePhoto" style="cursor:pointer"></i>
+
+                            </div>
+                        </div>
+                    }
+
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label asp-for="@Model.Files">Photos</label>
+                        <input asp-for="@Model.Files" class="form-control">
+                        <span asp-validation-for="@Model.Files" class="text-danger"></span>
+                    </div>
+                    <div class="form-row col-md-12 d-flex">
+                        @foreach (var item in Model.BookPhotos.Where(b => b.PosterStatus == false).ToList())
+                        {
+
+                            <div class="form-group col-md-12">
+                                <div style="margin-top:8px" class="photo-box">
+                                    <img style="max-width:100%" src="~/uploads/books/@item.Name" alt="Alternate Text" />
+                                    <input name="FileIds" value="@item.Id" hidden />
+                                    <i class="fas fa-times removePhoto" style="cursor:pointer"></i>
+
+                                </div>
+                            </div>
 
 
-                <button type="submit" class="btn btn-primary">Edit</button>
+                        }
+
+                    </div>
+                </div>
+
+
+
+
             </form>
+
+
+            <button type="submit" class="btn btn-primary">Edit</button>
+            <a asp-area="manage" asp-controller="Book" asp-action="index" style="border-radius:6px; padding:12px 19px 15px 14px;" class="button w-24 border text-gray-700 mr-1">Cancel</a>
+
         </div>
+
     </div>
 
 </div>
 @section Scripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).on("click", ".removePhoto", function () {
+                $(this).parent().empty()
+            })
+        })
+    </script>
+
 }
 
